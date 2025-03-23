@@ -48,7 +48,7 @@ async def get_invoices(wallet_ids: Union[str, List[str]]) -> List[Invoice]:
 
     q = ",".join([f"'{wallet_id}'" for wallet_id in wallet_ids])
     return await db.fetchall(
-        f"SELECT * FROM invoices.invoices WHERE wallet IN ({q})",
+        f"SELECT * FROM invoices.invoices WHERE wallet IN ({q}) ORDER BY time DESC",
         model=Invoice,
     )
 
